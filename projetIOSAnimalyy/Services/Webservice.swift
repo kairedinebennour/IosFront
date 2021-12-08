@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AuthentificationError: Error {
+enum Errors: Error {
     case invalidCredentials
     case bitch
     case messin
@@ -32,9 +32,9 @@ class Webservice {
     var NodeUrl = urlNode()
     
     //result is the token or error
-    func login(email: String , mdp: String, completion: @escaping (Result<String, AuthentificationError>) -> Void ){
+    func login(email: String , mdp: String, completion: @escaping (Result<String, Errors>) -> Void ){
         
-        guard let url = URL(string: NodeUrl.url + "login") else {
+        guard let url = URL(string: NodeUrl.url + "users/login") else {
             completion(.failure(.custom(errorMessage: "Url is not correct")))
             return
         }
@@ -72,7 +72,53 @@ class Webservice {
         }.resume() //to get the data
         
         
+    }
+    
+    
+    func registerUser(email: String , mdp: String,adresse: String,localisation: String,nomprenom: String,pdp:String, role: String){
+        
+        let parametres = ["email": email , "mdp": mdp, "nomprenom":nomprenom, "adresse":adresse,"localisation":"","pdp":"","role":"client"]
+        
+        guard let url = URL(string: NodeUrl.url + "users/register") else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parametres, options: [])
+        
+        URLSession.shared.dataTask(with: request){ data,response,error in
+            if let error = error {
+                print("The error was:\(error.localizedDescription)")
+            }
+            else{
+                let jsonRes = try? JSONSerialization.jsonObject(with: data!, options:  [])
+                print("Response json is: \(String(describing: jsonRes))")
+                
+            }
+            
+        }.resume()
+        
+        
         
     }
-}
     
+   
+        
+        
+        
+    }
+    
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
+

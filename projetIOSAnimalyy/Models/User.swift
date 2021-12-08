@@ -7,13 +7,15 @@
 
 struct User: Identifiable, Decodable, Equatable {
 
-    var id : Int
-    var email : String
-    var mdp: String
-    var nomprenom : String
-    var adresse : String
-    var localisation : String
-    var role: String
-    var pdp: String
+    var id : String?
+    var email : String?
+    var mdp: String?
+    var nomprenom : String?
+    var adresse : String?
+    var localisation : String?
+    var role: String?
+    var pdp: String?
+    var token: String?
+  
 
 }

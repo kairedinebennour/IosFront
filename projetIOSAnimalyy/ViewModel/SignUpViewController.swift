@@ -15,9 +15,38 @@ class SignUpViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-
+    @IBOutlet weak var nomPrenomTextField: UITextField!
+    
+    @IBOutlet weak var emailTextField: UITextField!
+    
+    @IBOutlet weak var mdpTextField: UITextField!
+    
+    @IBOutlet weak var adresseTextField: UITextField!
+    
+    
+    @IBAction func inscriptionButton(_ sender: UIButton) {
+        guard let nomprenom = self.nomPrenomTextField.text else { return }
+        guard let email = self.emailTextField.text else { return  }
+        guard let mdp = self.mdpTextField.text else { return  }
+        guard let adresse = self.adresseTextField.text else { return  }
+        
+        
+         Webservice().registerUser(email: email, mdp: mdp, adresse: adresse, localisation: "", nomprenom: nomprenom, pdp: "", role: "client") 
+        
+        
+    
+    }
+            
+       
+          
+    
+    
+    
+    
     /*
-    // MARK: - Navigation
+     @IBAction func emailTextField(_ sender: Any) {
+     }
+     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

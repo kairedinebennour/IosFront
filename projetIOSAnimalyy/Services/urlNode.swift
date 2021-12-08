@@ -9,5 +9,5 @@ import Foundation
 
 struct urlNode {
 
-var url: String = "http://192.168.254.128:3000/users/"
+var url: String = "http://192.168.254.128:3000/"
 }
