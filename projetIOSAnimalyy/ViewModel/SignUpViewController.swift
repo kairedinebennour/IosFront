@@ -31,7 +31,16 @@ class SignUpViewController: UIViewController {
         guard let adresse = self.adresseTextField.text else { return  }
         
         
-         Webservice().registerUser(email: email, mdp: mdp, adresse: adresse, localisation: "", nomprenom: nomprenom, pdp: "", role: "client") 
+        Webservice().registerUser(email: email, mdp: mdp, adresse: adresse, localisation: "", nomprenom: nomprenom, pdp: "", role: "client") { (result) in
+                switch result{
+                    case .success(let json):
+                    print(json as AnyObject)
+                    case .failure(let err):
+                    print(err.localizedDescription)
+            }
+        }
+        
+        
         
         
     

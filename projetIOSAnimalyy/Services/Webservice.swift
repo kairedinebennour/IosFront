@@ -25,57 +25,50 @@ struct LoginResponseBody: Codable {
     let message: String?
     let success: Bool?
 }
-
-
+enum ApiErros: Error{
+    case custom(message: String)
+}
+typealias Handler = (Swift.Result<Any?, ApiErros>) -> Void
+typealias UserHandler = (Swift.Result<(User), Error>) -> Void
 
 class Webservice {
     var NodeUrl = urlNode()
-    
+       
+
     //result is the token or error
-    func login(email: String , mdp: String, completion: @escaping (Result<String, Errors>) -> Void ){
+    func login(email: String , mdp: String, completionHandler : @escaping Handler){
         
-        guard let url = URL(string: NodeUrl.url + "users/login") else {
-            completion(.failure(.custom(errorMessage: "Url is not correct")))
-            return
-        }
+        let parametres = ["email": email , "mdp": mdp]
         
-        let body = LoginRequestBody(email: email, mdp: mdp)
-        print(body)
+        guard let url = URL(string: NodeUrl.url + "users/login") else { return }
+        
+        //let body = LoginRequestBody(email: email, mdp: mdp)
+        //print(body)
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.httpBody = try? JSONEncoder().encode(body)
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parametres, options: [])
+        //request.httpBody = try? JSONEncoder().encode(body)
        
         
         //perform the request
-        URLSession.shared.dataTask(with: request) { (data, response, error) in
-            
-        
-            guard let data = data , error == nil else {
-                completion(.failure(.custom(errorMessage: "No data")))
-                return
+        URLSession.shared.dataTask(with: request){ data,response,error in
+            if let error = error {
+                completionHandler(.failure(.custom(message: "Pls")))
             }
-            guard let loginResponse = try? JSONDecoder().decode(LoginResponseBody.self, from: data) else {
-                completion(.failure(.invalidCredentials))
-                return
-            }
-            
-            guard let token = loginResponse.token else {
-                completion(.failure(.invalidCredentials))
-                return
+            else{
+                let jsonRes = try? JSONSerialization.jsonObject(with: data!, options:  []) as? [String : Any]
+                completionHandler(.success(jsonRes))
                 
             }
-            completion(.success(token))
-            
-            
         }.resume() //to get the data
         
         
     }
     
     
-    func registerUser(email: String , mdp: String,adresse: String,localisation: String,nomprenom: String,pdp:String, role: String){
+    func registerUser(email: String , mdp: String,adresse: String,localisation: String,nomprenom: String,pdp:String, role: String,  completionHandler : @escaping Handler ){
         
         let parametres = ["email": email , "mdp": mdp, "nomprenom":nomprenom, "adresse":adresse,"localisation":"","pdp":"","role":"client"]
         
@@ -89,25 +82,83 @@ class Webservice {
         
         URLSession.shared.dataTask(with: request){ data,response,error in
             if let error = error {
-                print("The error was:\(error.localizedDescription)")
+                completionHandler(.failure(.custom(message: "Pls")))
             }
             else{
                 let jsonRes = try? JSONSerialization.jsonObject(with: data!, options:  [])
-                print("Response json is: \(String(describing: jsonRes))")
+                completionHandler(.success(jsonRes))
                 
             }
             
         }.resume()
+    }
         
         
         
+    
+    
+    func getOneAccount(token: String, completionHandler : @escaping UserHandler) {
+        
+        guard let url = URL(string: NodeUrl.url + "users/token") else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request){ data,response,error in
+            guard let data = data , error == nil else {
+                          return
+           }
+            
+            guard let jsonRes = try? JSONDecoder().decode(User.self, from: data) else {
+                return}
+            
+            completionHandler(.success(jsonRes))
+        }.resume()
+        
+            
+            
     }
     
-   
+    
+    func updateUser(token:String, email: String ,adresse: String,localisation: String,nomprenom: String,pdp:String ,  completionHandler : @escaping Handler ){
         
+        let parametres = ["email": email , "nomprenom":nomprenom, "adresse":adresse,"localisation":"","pdp":""]
         
+        guard let url = URL(string: NodeUrl.url + "users/update") else {
+            return
+        }
+        var request = URLRequest(url: url)
+        request.httpMethod = "PATCH"
+        request.addValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.httpBody = try? JSONSerialization.data(withJSONObject: parametres, options: [])
         
+        URLSession.shared.dataTask(with: request){ data,response,error in
+            if let error = error {
+                completionHandler(.failure(.custom(message: "Pls")))
+            }
+            else{
+                let jsonRes = try? JSONSerialization.jsonObject(with: data!, options:  [])
+                completionHandler(.success(jsonRes))
+               
+                
+            }
+            
+        }.resume()
     }
+}
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     
     

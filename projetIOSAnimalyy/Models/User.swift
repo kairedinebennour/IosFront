@@ -5,7 +5,7 @@
 //  Created by User on 16.11.2021.
 //
 
-struct User: Identifiable, Decodable, Equatable {
+struct User: Identifiable, Codable{
 
     var id : String?
     var email : String?

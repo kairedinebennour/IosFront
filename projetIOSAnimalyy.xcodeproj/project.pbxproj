@@ -18,11 +18,11 @@
 		CE5D5EE9275549F1004DFAE2 /* urlNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5D5EE8275549F1004DFAE2 /* urlNode.swift */; };
 		CE5D5EED27555843004DFAE2 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5D5EEC27555843004DFAE2 /* LoginViewController.swift */; };
 		CE5D5F332755968B004DFAE2 /* PageLivrerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5D5F322755968B004DFAE2 /* PageLivrerViewController.swift */; };
-		CE5D5F3527559722004DFAE2 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5D5F3427559722004DFAE2 /* testViewController.swift */; };
 		CE5D5F3727559765004DFAE2 /* CommencerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5D5F3627559765004DFAE2 /* CommencerViewController.swift */; };
 		CE5DE5CF2743A73200986F50 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE5DE5CE2743A73200986F50 /* User.swift */; };
 		CE65C7D8275D42EA00299E49 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE65C7D7275D42E900299E49 /* ProfileViewController.swift */; };
 		CE68371C2756B6AC00F9F4C6 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE68371B2756B6AC00F9F4C6 /* SignUpViewController.swift */; };
+		CE6CEBE2276768A0001C8602 /* ModifierProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CE6CEBE1276768A0001C8602 /* ModifierProfileViewController.swift */; };
 		F77326AE307056456924DBF5 /* Pods_projetIOSAnimalyy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C77E24C83141AA81C03CEEC /* Pods_projetIOSAnimalyy.framework */; };
 /* End PBXBuildFile section */
 
@@ -43,11 +43,11 @@
 		CE5D5EE8275549F1004DFAE2 /* urlNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = urlNode.swift; sourceTree = "<group>"; };
 		CE5D5EEC27555843004DFAE2 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		CE5D5F322755968B004DFAE2 /* PageLivrerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageLivrerViewController.swift; sourceTree = "<group>"; };
-		CE5D5F3427559722004DFAE2 /* testViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		CE5D5F3627559765004DFAE2 /* CommencerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommencerViewController.swift; sourceTree = "<group>"; };
 		CE5DE5CE2743A73200986F50 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		CE65C7D7275D42E900299E49 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		CE68371B2756B6AC00F9F4C6 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		CE6CEBE1276768A0001C8602 /* ModifierProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModifierProfileViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,10 +87,10 @@
 				CE59140D27406619000E2DE4 /* ViewController.swift */,
 				CE5D5EEC27555843004DFAE2 /* LoginViewController.swift */,
 				CE5D5F322755968B004DFAE2 /* PageLivrerViewController.swift */,
-				CE5D5F3427559722004DFAE2 /* testViewController.swift */,
 				CE5D5F3627559765004DFAE2 /* CommencerViewController.swift */,
 				CE68371B2756B6AC00F9F4C6 /* SignUpViewController.swift */,
 				CE65C7D7275D42E900299E49 /* ProfileViewController.swift */,
+				CE6CEBE1276768A0001C8602 /* ModifierProfileViewController.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -278,8 +278,8 @@
 				CE59140A27406619000E2DE4 /* AppDelegate.swift in Sources */,
 				CE5D5F3727559765004DFAE2 /* CommencerViewController.swift in Sources */,
 				CE59140C27406619000E2DE4 /* SceneDelegate.swift in Sources */,
+				CE6CEBE2276768A0001C8602 /* ModifierProfileViewController.swift in Sources */,
 				CE65C7D8275D42EA00299E49 /* ProfileViewController.swift in Sources */,
-				CE5D5F3527559722004DFAE2 /* testViewController.swift in Sources */,
 				CE5D5EE9275549F1004DFAE2 /* urlNode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

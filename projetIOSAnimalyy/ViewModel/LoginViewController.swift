@@ -10,7 +10,8 @@ import Foundation
 
 class LoginViewController: UIViewController {
     
-    
+  
+  
     override func viewDidLoad() {
         super.viewDidLoad()
        
@@ -19,7 +20,7 @@ class LoginViewController: UIViewController {
    
     
     let defaults = UserDefaults.standard
-    @Published var isAuthenticated: Bool = false // change property get notification
+ 
     
     
     
@@ -32,36 +33,29 @@ class LoginViewController: UIViewController {
         guard let email = self.textFieldEmail.text else { return  }
         guard let mdp = self.textFieldMdp.text else { return  }
         
-        Webservice().login(email: email, mdp: mdp){ result in
-        
-            print(email)
-            print(mdp)
-          
-         
-         switch result {
-         case .success(let token):
-             self.defaults.setValue(token, forKey: "jsonwebtoken")
-             
-             DispatchQueue.main.async {
-                 self.isAuthenticated = true
-                    
-                 
-             }
-         case .failure(let error):
-             print(error.localizedDescription)
-         }
-            
-     }
-        if(isAuthenticated == true){
-            print("hello")
-            performSegue(withIdentifier: "mSegue5", sender: sender)
+        Webservice().login(email: email, mdp: mdp){ (result) in
+            switch result{
+                case .success(let json):
+                let token = (json as AnyObject).value(forKey: "token") as! String
+                
+                self.defaults.setValue(token, forKey: "jsonwebtoken")
+                
+                //let user = (json as AnyObject).value(forKey: "user")
+                //print("this is user ", user)
+                //let id = (user as AnyObject).value(forKey: "nomprenom") as! String
+                //print("this is nomprenom ", id)
+                
+                DispatchQueue.main.async {
+                    self.performSegue(withIdentifier: "mSegue5", sender: sender)
+                }
+                
+                
+                case .failure(let err):
+                print(err.localizedDescription)
         }
-        
-    
     }
-    
     }
-       
+}
     
     
     
