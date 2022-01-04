@@ -1,0 +1,4 @@
+${PODS_ROOT}/Target Support Files/Pods-projetIOSAnimalyy/Pods-projetIOSAnimalyy-frameworks.sh
+${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
+${BUILT_PRODUCTS_DIR}/Braintree/Braintree.framework
+${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework
